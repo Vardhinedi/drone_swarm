@@ -1,0 +1,7 @@
+# Drone Swarm MVP Requirements
+- Simulate 5 drones in AirSim
+- Boid's flocking algorithm for swarm coordination
+- YOLOv8 for threat detection (e.g., vehicles, 85%+ accuracy)
+- PPO reinforcement learning for adaptive navigation
+- Web dashboard with Flask and Plotly
+- Metrics: Collision rate <5%, detection accuracy >85%
