@@ -15,17 +15,17 @@ def boid_flocking(client, drones):
     
     for i, drone in enumerate(drones):
         pos = positions[i]
-        # Cohesion: Move toward average position
+        # Cohesion: Move toward average position (stronger)
         avg_pos = np.mean(positions, axis=0)
-        cohesion = (avg_pos - pos) * 0.1
+        cohesion = (avg_pos - pos) * 0.3  # Increased from 0.1 to 0.3
         
-        # Separation: Avoid crowding
+        # Separation: Avoid crowding (stronger)
         separation = np.zeros(3)
         for j, other_pos in enumerate(positions):
             if i != j and np.linalg.norm(pos - other_pos) < 5:
-                separation -= (other_pos - pos) * 0.2
+                separation -= (other_pos - pos) * 0.5  # Increased from 0.2 to 0.5
         
-        # Alignment: Match average velocity (simplified as zero for now)
+        # Alignment: Match average velocity (simplified)
         alignment = np.zeros(3)
         
         # Combine rules
@@ -63,9 +63,9 @@ def start_swarm_simulation():
                 print(f"Error moving {drone}: {str(e)}")
                 traceback.print_exc()
 
-        # Apply flocking for 10 seconds
+        # Apply flocking for 15 seconds (extended for visibility)
         start_time = time.time()
-        while time.time() - start_time < 10:
+        while time.time() - start_time < 15:
             velocities = boid_flocking(client, drones)
             for drone, velocity in zip(drones, velocities):
                 try:
